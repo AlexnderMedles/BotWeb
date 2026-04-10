@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NetAware — ИИ-бот по теме интернет-зависимости. Тест, симптомы, рекомендации.">
+  <title>NetAware — Бот об Интернет-зависимости</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+
+<body>
+
+  <!-- Particle Network Canvas -->
+  <canvas id="particleCanvas"></canvas>
+  <div class="vignette"></div>
+
+  <div class="app-container">
+
+    <!-- Floating Navbar -->
+    <nav class="navbar" id="navbar">
+      <a href="#" class="navbar-brand">
+        <div class="navbar-logo">🧠</div>
+        <span class="navbar-title">NetAware</span>
+      </a>
+      <ul class="navbar-links">
+        <li><a href="#hero" class="active">Главная</a></li>
+        <li><a href="#stats">Факты</a></li>
+        <li><a href="#chatSection">Чат-бот</a></li>
+        <li><a href="#info">О проблеме</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        AI-бот онлайн
+      </div>
+      <h1>
+        Осознай свою<br>
+        <span class="gradient-text">цифровую зависимость</span>
+      </h1>
+      <p class="hero-subtitle">
+        Пройди тест на интернет-зависимость, узнай симптомы и получи
+        персональные рекомендации от искусственного интеллекта.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="scrollToChat">💬 Начать диалог</button>
+        <button class="btn btn-secondary" id="startTestBtn">🧪 Пройти тест</button>
+      </div>
+      <div class="scroll-indicator">Прокрути вниз</div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section" id="stats">
+      <div class="stats-grid">
+        <div class="stat-card reveal">
+          <div class="stat-number" data-count="6" data-suffix="%">0%</div>
+          <div class="stat-label">населения мира страдает<br>интернет-зависимостью</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-number" data-count="7" data-suffix=" ч">0 ч</div>
+          <div class="stat-label">в среднем проводим<br>в телефоне каждый день</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-number" data-count="96" data-suffix="×">0×</div>
+          <div class="stat-label">в день мы проверяем<br>свой телефон</div>
+        </div>
+        <div class="stat-card reveal">
+          <div class="stat-number" data-count="70" data-suffix="%">0%</div>
+          <div class="stat-label">зависимых имеют<br>нарушения сна</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat -->
+    <section class="chat-section" id="chatSection">
+      <div class="section-header reveal">
+        <h2>Поговори с ботом</h2>
+        <p>Задай вопрос или пройди тест — бот ответит мгновенно</p>
+      </div>
+
+      <div class="chat-container reveal">
+        <div class="chat-header">
+          <div class="chat-avatar">🤖</div>
+          <div class="chat-info">
+            <h3>NetAware Bot <span style="font-size:0.7rem;color:var(--sky);font-weight:400;opacity:0.8">· AI</span>
+            </h3>
+            <div class="status">Онлайн</div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button class="quick-btn" data-action="test">🧪 Тест</button>
+          <button class="quick-btn" data-action="symptoms">🔍 Симптомы</button>
+          <button class="quick-btn" data-action="causes">⚡ Причины</button>
+          <button class="quick-btn" data-action="tips">💡 Советы</button>
+          <button class="quick-btn" data-action="stats">📊 Статистика</button>
+          <button class="quick-btn" data-action="treatment">💊 Лечение</button>
+        </div>
+
+        <div class="test-progress" id="testProgress">
+          <div class="test-progress-text">
+            <span id="progressText">Вопрос 1 из 10</span>
+            <span>Тест</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Напиши сообщение…" autocomplete="off">
+          <button class="send-btn" id="sendBtn" title="Отправить">➤</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info -->
+    <section class="info-section" id="info">
+      <div class="section-header reveal">
+        <h2>О проблеме</h2>
+        <p>Что нужно знать об интернет-зависимости</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card reveal">
+          <div class="info-card-icon purple">🔍</div>
+          <h3>Симптомы</h3>
+          <p>Навязчивая проверка уведомлений, потеря контроля над временем, раздражительность без доступа к сети.</p>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-card-icon blue">⚡</div>
+          <h3>Причины</h3>
+          <p>Одиночество, дизайн приложений — бесконечная лента, push-уведомления и дофаминовые петли.</p>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-card-icon cyan">⚠️</div>
+          <h3>Последствия</h3>
+          <p>Бессонница, ухудшение зрения, депрессия, снижение успеваемости и социальная изоляция.</p>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-card-icon pink">🧪</div>
+          <h3>Диагностика</h3>
+          <p>Тест Кимберли Янг — золотой стандарт. Пройдите адаптированный тест в нашем чат-боте.</p>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-card-icon green">💊</div>
+          <h3>Лечение</h3>
+          <p>КПТ-терапия, цифровой детокс, лимиты экранного времени, замена привычек офлайн-активностями.</p>
+        </div>
+        <div class="info-card reveal">
+          <div class="info-card-icon purple">💡</div>
+          <h3>Профилактика</h3>
+          <p>Правило 20-20-20, зоны без телефона, утренний ритуал без гаджетов и осознанное потребление.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 NetAware — Семестровый проект по теме интернет-зависимости</p>
+      <p style="margin-top: 8px; opacity: 0.6;">Бот не является заменой профессиональной медицинской помощи</p>
+    </footer>
+
+  </div>
+
+  <!-- Particle Network Animation -->
+  <script>
+    (function () {
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [];
+      const PARTICLE_COUNT = 60;
+      const CONNECT_DIST = 140;
+      let mouse = { x: null, y: null };
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 1.5 + 0.5,
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h;
+          if (p.y > h) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(124, 58, 237, 0.35)';
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < CONNECT_DIST) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(124, 58, 237, ${0.08 * (1 - dist / CONNECT_DIST)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+
+          if (mouse.x !== null) {
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 200) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(mouse.x, mouse.y);
+              ctx.strokeStyle = `rgba(124, 58, 237, ${0.15 * (1 - dist / 200)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); createParticles(); });
+      window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+      window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+      resize();
+      createParticles();
+      draw();
+    })();
+  </script>
+
+  <script src="bot.js"></script>
+</body>
+
+</html>
